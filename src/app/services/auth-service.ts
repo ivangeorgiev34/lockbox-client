@@ -8,15 +8,6 @@ import { catchError, map, Observable, of, switchMap } from 'rxjs';
 export class AuthService {
   private msalService = inject(MsalService);
 
-  login(scopes: string[]) {
-    this.msalService.initialize().subscribe({
-      next: () => {
-        this.msalService.loginPopup({ scopes }).subscribe({ next: (val) => console.log(val) });
-      },
-      error: (err) => console.log(err),
-    });
-  }
-
   getToken(scopes: string[]): Observable<string | null> {
     return this.msalService.initialize().pipe(
       switchMap(() => {

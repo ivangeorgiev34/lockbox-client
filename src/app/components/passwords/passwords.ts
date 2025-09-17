@@ -23,6 +23,5 @@ export class Passwords implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.dataSource.data = this.passwords() ?? [];
-    console.log(this.passwords());
   }
 }
