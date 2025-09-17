@@ -1,13 +1,12 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import {MsalModule} from "@azure/msal-angular"
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Home } from './components/home/home';
+import { Loader } from './components/loader/loader';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MsalModule],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
+  imports: [Home, CommonModule, Loader],
 })
-export class App {
-  protected readonly title = signal('lockbox');
-}
+export class App {}
