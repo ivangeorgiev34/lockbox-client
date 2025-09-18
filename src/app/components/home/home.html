@@ -3,5 +3,8 @@
     <h1>LockBox</h1>
     <button matButton="filled">Create Password</button>
   </div>
-  <app-passwords [passwords]="this.passwords()" />
+  <app-passwords
+    [passwords]="this.passwords()"
+    (deletedPasswordId)="handleDeletedPassword($event)"
+  />
 </div>

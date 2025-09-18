@@ -46,4 +46,8 @@ export class Home implements OnInit {
         error: (err) => console.error('Error:', err),
       });
   }
+
+  handleDeletedPassword(id: string) {
+    this.passwords.update((prev) => prev?.filter((x) => x.id !== id) ?? null);
+  }
 }
