@@ -26,7 +26,7 @@ export class Home implements OnInit {
       title: 'test',
       username: 'test',
       email: 'example@gmail.com',
-      password: 'pass123',
+      password: 'jt43jt4jot4t43-regrew',
     },
     {
       id: 'ed7b6a33-b4b9-43a2-ad9c-19fee98d9e24',
