@@ -4,15 +4,22 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { PasswordContainer } from './password-container/password-container';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatButton, MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-passwords',
-  imports: [MatTableModule, MatPaginatorModule, PasswordContainer, ClipboardModule],
+  imports: [
+    MatTableModule,
+    MatPaginatorModule,
+    PasswordContainer,
+    ClipboardModule,
+    MatButtonModule,
+  ],
   templateUrl: './passwords.html',
   styleUrl: './passwords.scss',
 })
 export class Passwords implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['id', 'title', 'username', 'email', 'password'];
+  displayedColumns: string[] = ['id', 'title', 'username', 'email', 'password', 'actions'];
   passwords = input<Password[] | null>();
   dataSource = new MatTableDataSource<Password>(this.passwords() ?? []);
 
