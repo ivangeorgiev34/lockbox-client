@@ -1,10 +1,12 @@
-import { AfterViewInit, Component, input, OnInit, ViewChild } from '@angular/core';
+import { Component, effect, inject, input, output, ViewChild } from '@angular/core';
 import { Password } from '../../models/Password';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { PasswordContainer } from './password-container/password-container';
 import { ClipboardModule } from '@angular/cdk/clipboard';
-import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
+import { DeletePasswordDialog } from '../dialogs/delete-password-dialog/delete-password-dialog';
 
 @Component({
   selector: 'app-passwords',
@@ -18,20 +20,29 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
   templateUrl: './passwords.html',
   styleUrl: './passwords.scss',
 })
-export class Passwords implements OnInit, AfterViewInit {
+export class Passwords {
   displayedColumns: string[] = ['id', 'title', 'username', 'email', 'password', 'actions'];
   passwords = input<Password[] | null>();
   dataSource = new MatTableDataSource<Password>(this.passwords() ?? []);
+  dialog = inject(MatDialog);
+  deletedPasswordId = output<string>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+  constructor() {
+    effect(() => {
+      this.dataSource.data = this.passwords() ?? [];
+      if (this.paginator) this.dataSource.paginator = this.paginator;
+    });
   }
 
-  ngOnInit(): void {
-    this.dataSource.data = this.passwords() ?? [];
-  }
+  handleDeleteClick(id: string, title: string) {
+    const dialogRef = this.dialog.open(DeletePasswordDialog, {
+      data: { id, title },
+    });
 
-  handleCopyToClipboardCopied() {}
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!!result) this.deletedPasswordId.emit(result);
+    });
+  }
 }
