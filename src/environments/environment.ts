@@ -16,7 +16,7 @@ export const environment: IEnvironment = {
     },
     passwordOptions: {
       excludeSimilarCharacters: true,
-      exclude: "'`~",
+      exclude: '\'`~":;,.',
       length: 20,
       symbols: true,
       numbers: true,
