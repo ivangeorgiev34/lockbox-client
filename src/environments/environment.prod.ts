@@ -19,5 +19,13 @@ export const environment: IEnvironment = {
       deletePasswordFunc:
         'https://api-lockbox-e4cmacbscsd3ftah.westeurope-01.azurewebsites.net/api/DeletePasswordFunc',
     },
+    passwordOptions: {
+      excludeSimilarCharacters: true,
+      exclude: '\'`~":;,.',
+      length: 20,
+      symbols: true,
+      numbers: true,
+      strict: true,
+    },
   },
 };

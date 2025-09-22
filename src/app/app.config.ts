@@ -22,6 +22,7 @@ import {
   MSALInstanceFactory,
   MSALInterceptorConfigFactory,
 } from './msal-config';
+import { PasswordFactory } from './utils/passwordFactory';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -40,5 +41,6 @@ export const appConfig: ApplicationConfig = {
     MsalService,
     MsalGuard,
     MsalBroadcastService,
+    PasswordFactory,
   ],
 };

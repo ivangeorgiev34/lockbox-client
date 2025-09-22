@@ -6,5 +6,6 @@
   <app-passwords
     [passwords]="this.passwords()"
     (deletedPasswordId)="handleDeletedPassword($event)"
+    (editedPassword)="handleEditedPassword($event)"
   />
 </div>

@@ -7,6 +7,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { DeletePasswordDialog } from '../dialogs/delete-password-dialog/delete-password-dialog';
+import { EditPasswordDialog } from '../dialogs/edit-password-dialog/edit-password-dialog';
 
 @Component({
   selector: 'app-passwords',
@@ -26,6 +27,7 @@ export class Passwords {
   dataSource = new MatTableDataSource<Password>(this.passwords() ?? []);
   dialog = inject(MatDialog);
   deletedPasswordId = output<string>();
+  editedPassword = output<Password>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -43,6 +45,16 @@ export class Passwords {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (!!result) this.deletedPasswordId.emit(result);
+    });
+  }
+
+  handleEditClick(password: Password) {
+    const dialogRef = this.dialog.open(EditPasswordDialog, {
+      data: { ...password },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!!result) this.editedPassword.emit(result);
     });
   }
 }

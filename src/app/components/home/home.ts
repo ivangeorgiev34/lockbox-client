@@ -50,4 +50,10 @@ export class Home implements OnInit {
   handleDeletedPassword(id: string) {
     this.passwords.update((prev) => prev?.filter((x) => x.id !== id) ?? null);
   }
+
+  handleEditedPassword(password: Password) {
+    this.passwords.update(
+      (prev) => prev?.map((x) => (x.id === password.id ? password : x)) ?? null
+    );
+  }
 }

@@ -1,3 +1,5 @@
+import { GenerateOptions } from 'generate-password-browser';
+
 export default interface IEnvironment {
   production: boolean;
   msal: {
@@ -12,5 +14,6 @@ export default interface IEnvironment {
       deletePasswordFunc: string;
       updatePasswordFunc: string;
     };
+    passwordOptions: GenerateOptions;
   };
 }

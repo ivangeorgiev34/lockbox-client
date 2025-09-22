@@ -14,5 +14,13 @@ export const environment: IEnvironment = {
       updatePasswordFunc: 'http://localhost:7071/api/UpdatePasswordFunc',
       deletePasswordFunc: 'http://localhost:7071/api/DeletePasswordFunc',
     },
+    passwordOptions: {
+      excludeSimilarCharacters: true,
+      exclude: '\'`~":;,.',
+      length: 20,
+      symbols: true,
+      numbers: true,
+      strict: true,
+    },
   },
 };
