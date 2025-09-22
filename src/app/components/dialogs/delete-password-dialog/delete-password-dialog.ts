@@ -51,7 +51,7 @@ export class DeletePasswordDialog {
           this.dialog.close(this.data.id);
           this.snackBar.open(message, 'Close', { duration: 3000 });
         },
-        error: (err) => this.errorMessage.set(err),
+        error: (err) => this.errorMessage.set(err.error.message),
       });
   }
 }
