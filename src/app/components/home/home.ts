@@ -62,7 +62,7 @@ export class Home implements OnInit {
     const dialogRef = this.dialog.open(CreatePasswordDialog);
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.passwords.update((prev) => [...(prev ?? []), result]);
+      if (!!result) this.passwords.update((prev) => [...(prev ?? []), result]);
     });
   }
 }
