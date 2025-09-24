@@ -1,5 +1,5 @@
 import { Component, inject, input, signal } from '@angular/core';
-import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatIconButton } from '@angular/material/button';
 import { MatIcon, MatIconRegistry } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { DomSanitizer } from '@angular/platform-browser';
