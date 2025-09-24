@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { ApiResponse } from '../models/ApiResponse';
 import { Password } from '../models/Password';
+import { CreatePasswordModel } from '../components/dialogs/create-password-dialog/create-password-dialog';
 
 type UpdatePasswordBody = {
   title: string;
@@ -42,6 +43,14 @@ export class PasswordService {
       environment.msal.azureFunctionsUrls.updatePasswordFunc,
       body,
       this.getOptions<UpdatePasswordBody>(token, new HttpParams().append('id', password.id))
+    );
+  }
+
+  create(token: string, body: CreatePasswordModel) {
+    return this.http.post<ApiResponse<Password>>(
+      environment.msal.azureFunctionsUrls.createPasswordFunc,
+      body,
+      this.getOptions(token)
     );
   }
 
