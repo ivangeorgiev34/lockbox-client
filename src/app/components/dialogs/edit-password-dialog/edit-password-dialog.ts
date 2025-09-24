@@ -3,8 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { Password } from '../../../models/Password';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
-import { MatIcon, MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
+import { MatIcon } from '@angular/material/icon';
 import { PasswordFactory } from '../../../utils/passwordFactory';
 import { AuthService } from '../../../services/auth-service';
 import { PasswordService } from '../../../services/password-service';
@@ -22,28 +21,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class EditPasswordDialog {
   private dialogRef = inject(MatDialogRef<EditPasswordDialog>);
   private data = inject<Password>(MAT_DIALOG_DATA);
-  private matIconRegistry = inject(MatIconRegistry);
-  private domSanitizer = inject(DomSanitizer);
   private passwordFactory = inject(PasswordFactory);
   private authService = inject(AuthService);
   private passwordService = inject(PasswordService);
   private loaderService = inject(LoaderService);
   private snackBar = inject(MatSnackBar);
-
-  constructor() {
-    this.matIconRegistry.addSvgIcon(
-      'eye',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/eye.svg')
-    );
-    this.matIconRegistry.addSvgIcon(
-      'hidden-eye',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/hidden-eye.svg')
-    );
-    this.matIconRegistry.addSvgIcon(
-      'dice',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/dice.svg')
-    );
-  }
 
   model = model<Password>(this.data);
   isVisible = signal<boolean>(false);
