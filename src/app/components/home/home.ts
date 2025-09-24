@@ -2,13 +2,13 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { AuthService } from '../../services/auth-service';
 import { environment } from '../../../environments/environment';
 import { finalize, switchMap } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 import { Password } from '../../models/Password';
-import { ApiResponse } from '../../models/ApiResponse';
 import { LoaderService } from '../../services/loader-service';
 import { MatButtonModule } from '@angular/material/button';
 import { Passwords } from '../passwords/passwords';
 import { PasswordService } from '../../services/password-service';
+import { MatDialog } from '@angular/material/dialog';
+import { CreatePasswordDialog } from '../dialogs/create-password-dialog/create-password-dialog';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +20,7 @@ export class Home implements OnInit {
   private authService = inject(AuthService);
   private passwordService = inject(PasswordService);
   private loaderService = inject(LoaderService);
+  private dialog = inject(MatDialog);
 
   passwords = signal<Password[] | null>([]);
 
@@ -55,5 +56,13 @@ export class Home implements OnInit {
     this.passwords.update(
       (prev) => prev?.map((x) => (x.id === password.id ? password : x)) ?? null
     );
+  }
+
+  handleCreatePasswordClick() {
+    const dialogRef = this.dialog.open(CreatePasswordDialog);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.passwords.update((prev) => [...(prev ?? []), result]);
+    });
   }
 }
