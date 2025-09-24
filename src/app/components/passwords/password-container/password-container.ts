@@ -1,8 +1,7 @@
 import { Component, inject, input, signal } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
-import { MatIcon, MatIconRegistry } from '@angular/material/icon';
+import { MatIcon } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { DomSanitizer } from '@angular/platform-browser';
 import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
 
 @Component({
@@ -12,20 +11,6 @@ import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
   styleUrl: './password-container.scss',
 })
 export class PasswordContainer {
-  private matIconRegistry = inject(MatIconRegistry);
-  private domSanitizer = inject(DomSanitizer);
-
-  constructor() {
-    this.matIconRegistry.addSvgIcon(
-      'eye',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/eye.svg')
-    );
-    this.matIconRegistry.addSvgIcon(
-      'hidden-eye',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/hidden-eye.svg')
-    );
-  }
-
   password = input<string>();
   isVisible = signal<boolean>(false);
 
