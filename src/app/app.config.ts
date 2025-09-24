@@ -8,7 +8,6 @@ import { provideRouter, withEnabledBlockingInitialNavigation } from '@angular/ro
 import { routes } from './app.routes';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {
-  MSAL_BROADCAST_CONFIG,
   MSAL_GUARD_CONFIG,
   MSAL_INSTANCE,
   MSAL_INTERCEPTOR_CONFIG,
