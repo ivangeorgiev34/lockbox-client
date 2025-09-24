@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { DeletePasswordDialog } from '../dialogs/delete-password-dialog/delete-password-dialog';
 import { EditPasswordDialog } from '../dialogs/edit-password-dialog/edit-password-dialog';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 
 @Component({
   selector: 'app-passwords',
@@ -17,6 +18,7 @@ import { EditPasswordDialog } from '../dialogs/edit-password-dialog/edit-passwor
     PasswordContainer,
     ClipboardModule,
     MatButtonModule,
+    MatSortModule,
   ],
   templateUrl: './passwords.html',
   styleUrl: './passwords.scss',
@@ -30,11 +32,13 @@ export class Passwords {
   editedPassword = output<Password>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor() {
     effect(() => {
       this.dataSource.data = this.passwords() ?? [];
       if (this.paginator) this.dataSource.paginator = this.paginator;
+      if (this.sort) this.dataSource.sort = this.sort;
     });
   }
 
