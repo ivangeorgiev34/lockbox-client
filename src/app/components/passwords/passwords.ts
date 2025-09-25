@@ -9,6 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeletePasswordDialog } from '../dialogs/delete-password-dialog/delete-password-dialog';
 import { EditPasswordDialog } from '../dialogs/edit-password-dialog/edit-password-dialog';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatRipple } from '@angular/material/core';
 
 @Component({
   selector: 'app-passwords',
@@ -19,11 +21,13 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
     ClipboardModule,
     MatButtonModule,
     MatSortModule,
+    MatRipple,
   ],
   templateUrl: './passwords.html',
   styleUrl: './passwords.scss',
 })
 export class Passwords {
+  private snackBar = inject(MatSnackBar);
   displayedColumns: string[] = ['id', 'title', 'username', 'email', 'password', 'actions'];
   passwords = input<Password[] | null>();
   dataSource = new MatTableDataSource<Password>(this.passwords() ?? []);
@@ -60,5 +64,9 @@ export class Passwords {
     dialogRef.afterClosed().subscribe((result) => {
       if (!!result) this.editedPassword.emit(result);
     });
+  }
+
+  handleCopyToClipboard() {
+    this.snackBar.open('Copied to clipboard', 'Close', { duration: 3000 });
   }
 }
