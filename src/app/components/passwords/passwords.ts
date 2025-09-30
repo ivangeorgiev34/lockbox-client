@@ -11,6 +11,7 @@ import { EditPasswordDialog } from '../dialogs/edit-password-dialog/edit-passwor
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatRipple } from '@angular/material/core';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'app-passwords',
@@ -22,6 +23,7 @@ import { MatRipple } from '@angular/material/core';
     MatButtonModule,
     MatSortModule,
     MatRipple,
+    MatInput,
   ],
   templateUrl: './passwords.html',
   styleUrl: './passwords.scss',
@@ -44,6 +46,11 @@ export class Passwords {
       if (this.paginator) this.dataSource.paginator = this.paginator;
       if (this.sort) this.dataSource.sort = this.sort;
     });
+
+    this.dataSource.filterPredicate = (data, filter) =>
+      data.email.toLowerCase().includes(filter.toLowerCase()) ||
+      data.username.toLowerCase().includes(filter.toLowerCase()) ||
+      data.title.toLowerCase().includes(filter.toLowerCase());
   }
 
   handleDeleteClick(id: string, title: string) {
@@ -68,5 +75,10 @@ export class Passwords {
 
   handleCopyToClipboard() {
     this.snackBar.open('Copied to clipboard', 'Close', { duration: 3000 });
+  }
+
+  handleSearchInput(event: Event) {
+    const searchText = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = searchText;
   }
 }
