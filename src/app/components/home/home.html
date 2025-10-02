@@ -2,6 +2,18 @@
   <div class="heading">
     <h1>Lockbox</h1>
     <button matButton="filled" (click)="handleCreatePasswordClick()">Create Password</button>
+    <button
+      type="button"
+      class="themeBtn"
+      matIconButton
+      (click)="this.theme() == Theme.Light ? handleLightThemeClick() : handleDarkThemeClick()"
+    >
+      @if(this.theme() == Theme.Light){
+      <mat-icon svgIcon="sun"></mat-icon>
+      } @else if (this.theme() == Theme.Dark) {
+      <mat-icon svgIcon="moon"></mat-icon>
+      }
+    </button>
   </div>
   <app-passwords
     [passwords]="this.passwords()"

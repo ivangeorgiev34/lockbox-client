@@ -1,7 +1,7 @@
 import {
   ApplicationConfig,
   provideBrowserGlobalErrorListeners,
-  provideZoneChangeDetection,
+  provideZoneChangeDetection, isDevMode,
 } from '@angular/core';
 import { provideRouter, withEnabledBlockingInitialNavigation } from '@angular/router';
 
@@ -22,6 +22,7 @@ import {
   MSALInterceptorConfigFactory,
 } from './msal-config';
 import { PasswordFactory } from './utils/passwordFactory';
+import { provideServiceWorker } from '@angular/service-worker';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -40,6 +41,9 @@ export const appConfig: ApplicationConfig = {
     MsalService,
     MsalGuard,
     MsalBroadcastService,
-    PasswordFactory,
+    PasswordFactory, provideServiceWorker('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            registrationStrategy: 'registerWhenStable:30000'
+          }),
   ],
 };
