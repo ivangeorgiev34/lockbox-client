@@ -3,9 +3,15 @@
 }
 
 .heading {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+.themeBtn {
+  position: absolute;
+  right: 160px;
 }

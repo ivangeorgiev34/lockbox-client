@@ -9,10 +9,16 @@ import { Passwords } from '../passwords/passwords';
 import { PasswordService } from '../../services/password-service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreatePasswordDialog } from '../dialogs/create-password-dialog/create-password-dialog';
+import { MatIcon } from '@angular/material/icon';
+
+export enum Theme {
+  Light,
+  Dark,
+}
 
 @Component({
   selector: 'app-home',
-  imports: [MatButtonModule, Passwords],
+  imports: [MatButtonModule, Passwords, MatIcon],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
@@ -23,6 +29,8 @@ export class Home implements OnInit {
   private dialog = inject(MatDialog);
 
   passwords = signal<Password[] | null>([]);
+  theme = signal<Theme>(Theme.Light);
+  Theme = Theme;
 
   ngOnInit(): void {
     this.loaderService.enable();
@@ -64,5 +72,19 @@ export class Home implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (!!result) this.passwords.update((prev) => [...(prev ?? []), result]);
     });
+  }
+
+  handleLightThemeClick() {
+    this.theme.set(Theme.Dark);
+
+    document.body.classList.toggle('dark-theme');
+    document.body.classList.remove('light-theme');
+  }
+
+  handleDarkThemeClick() {
+    this.theme.set(Theme.Light);
+
+    document.body.classList.toggle('light-theme');
+    document.body.classList.remove('dark-theme');
   }
 }

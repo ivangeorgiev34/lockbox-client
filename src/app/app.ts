@@ -27,5 +27,13 @@ export class App {
       'dice',
       this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/dice.svg')
     );
+    this.matIconRegistry.addSvgIcon(
+      'moon',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/moon.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'sun',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/sun.svg')
+    );
   }
 }
