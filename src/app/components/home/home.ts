@@ -29,7 +29,7 @@ export class Home implements OnInit {
   private dialog = inject(MatDialog);
 
   passwords = signal<Password[] | null>([]);
-  theme = signal<Theme>(Theme.Light);
+  theme = signal<Theme>(Theme.Dark);
   Theme = Theme;
 
   ngOnInit(): void {

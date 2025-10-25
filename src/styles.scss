@@ -45,10 +45,16 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
+svg {
+  fill: var(--icon-color);
+}
+
 body.dark-theme {
   color-scheme: dark;
+  --icon-color: #fff;
 }
 
 body.light-theme {
   color-scheme: light;
+  --icon-color: #000;
 }

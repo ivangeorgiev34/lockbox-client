@@ -35,5 +35,8 @@ export class App {
       'sun',
       this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/sun.svg')
     );
+
+    document.body.classList.toggle('dark-theme');
+    document.body.classList.remove('light-theme');
   }
 }
